@@ -86,7 +86,8 @@ module ItineraryHelper
   end
 
   def otp_time_to_datetime otp_time
-    Time.at(otp_time.to_f/1000).in_time_zone("UTC")
+    # Time.at(otp_time.to_f/1000).in_time_zone("UTC")
+    Time.at(otp_time.to_f/1000).in_time_zone("Mountain Time (US & Canada)")
   end
 
   def leg_steps leg

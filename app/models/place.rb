@@ -65,6 +65,10 @@ class Place < ActiveRecord::Base
       self.raw_address = self.name
     end
 
+    if self.name.nil?
+      self.name = self.raw_address
+    end
+
     self.save
 
   end
