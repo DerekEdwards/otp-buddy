@@ -147,7 +147,7 @@
 
 
   var latlngs = JSON.parse('#{GeographyService.new.callnride_boundary_array}');
-  var polygon = L.multiPolygon(latlngs, {color: 'red'}).addTo(mymap);
+  var polygon = L.polygon(latlngs, {color: 'red'}).addTo(mymap);
   // zoom the map to the polygon
   mymap.fitBounds(polygon.getBounds());
 
