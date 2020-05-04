@@ -69,9 +69,9 @@ class OTPService
     url_options += "&locale=#{locale}"
 
     #Flex Params
-    url_options += "&flex_use_reservation_services=#{flex_use_reservation_services.nil? ? true : flex_use_reservation_services}"
-    url_options += "&flex_use_eligibility_services=#{flex_use_eligibility_services.nil? ? true : flex_use_eligibility_services}"
-    url_options += "&max_pretransit_time=#{max_pretransit_time}"
+    url_options += "&flexUseReservationServices=#{flex_use_reservation_services.nil? ? true : flex_use_reservation_services}"
+    url_options += "&flexUseEligibilityServices=#{flex_use_eligibility_services.nil? ? true : flex_use_eligibility_services}"
+    url_options += "&maxPretransitTime=#{max_pretransit_time}"
 
     url = base_url + url_options
 
