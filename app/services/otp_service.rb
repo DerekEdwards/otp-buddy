@@ -6,7 +6,8 @@ class OTPService
   def plan(from,
       to, trip_datetime, arriveBy=true, mode="TRANSIT,WALK", wheelchair="false", walk_speed=3.0,
       max_walk_distance=2, max_bicycle_distance=5, optimize='QUICK', num_itineraries=3,
-      min_transfer_time=nil, max_transfer_time=nil, banned_routes=nil, preferred_routes=nil, trip_shown_range_time=nil)
+      min_transfer_time=nil, max_transfer_time=nil, banned_routes=nil, preferred_routes=nil, trip_shown_range_time=nil, locale="es",
+      flex_use_reservation_services=true, flex_use_eligibility_services=true, max_pretransit_time=1800)
 
     #walk_speed is defined in MPH and converted to m/s before going to OTP
     #max_walk_distance is defined in miles and converted to meters before going to OTP
@@ -63,6 +64,14 @@ class OTPService
       when 'transfers'
         url_options += "&transferPenalty=" + Setting.otp_transfer_penalty.to_s
     end
+
+    # LANGUAGE TO RETURN RESULTS
+    url_options += "&locale=#{locale}"
+
+    #Flex Params
+    url_options += "&flex_use_reservation_services=#{flex_use_reservation_services.nil? ? true : flex_use_reservation_services}"
+    url_options += "&flex_use_eligibility_services=#{flex_use_eligibility_services.nil? ? true : flex_use_eligibility_services}"
+    url_options += "&max_pretransit_time=#{max_pretransit_time}"
 
     url = base_url + url_options
 

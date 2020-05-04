@@ -14,7 +14,10 @@ class Request < ActiveRecord::Base
                                                  self.trip.scheduled_time, self.trip.arrive_by, otp_mode, wheelchair=false,
                                                  self.trip.walk_mph, self.trip.max_walk_miles, self.trip.max_bike_miles, self.trip.optimize,
                                                  self.trip.num_itineraries, self.trip.min_transfer_seconds, self.trip.max_transfer_seconds,
-                                                 self.trip.banned_routes,self.trip.preferred_routes,self.trip.trip_shown_range_time)
+                                                 self.trip.banned_routes,self.trip.preferred_routes,self.trip.trip_shown_range_time,self.trip.locale,
+                                                 self.trip.flex_use_reservation_services, self.trip.flex_use_eligibility_services, 
+                                                 self.trip.max_pretransit_time)
+    
     self.otp_request = otp_request
     self.otp_response_code = @otp_response.code
     self.otp_response_message = @otp_response.message
@@ -56,8 +59,8 @@ class Request < ActiveRecord::Base
 
     legs.each do |leg|
       #1 Check to see if this route_type is classified as a special route_type
-
       specials = Setting.gtfs_special_route_types
+
       if leg['routeType'].nil?
         leg['specialService'] = false
       else

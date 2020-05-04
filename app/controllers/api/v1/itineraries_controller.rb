@@ -22,6 +22,10 @@ module Api
         trip_shown_range_time = params[:trip_shown_range_time]
         banned_routes = params[:banned_routes]
         preferred_routes = params[:preferred_routes]
+        locale = params[:locale] || "en"
+        flex_use_reservation_services = params[:flex_use_reservation_services]
+        flex_use_eligibility_services = params[:flex_use_eligibility_services]
+        max_pretransit_time = params[:max_pretransit_time] || 1800
 
         source_tag = params[:source_tag]
 
@@ -41,7 +45,10 @@ module Api
         #trip.trip_shown_range_time = trip_shown_range_time.nil? ? nil : trip_shown_range_time.to_i
         trip.trip_shown_range_time = trip_shown_range_time.nil? ? nil : trip_shown_range_time.to_i
         trip.source_tag = source_tag
-
+        trip.locale = locale 
+        trip.flex_use_reservation_services = flex_use_reservation_services
+        trip.flex_use_eligibility_services = flex_use_eligibility_services
+        trip.max_pretransit_time = max_pretransit_time
 
         #Build the Trip Places
         origin = Place.new
